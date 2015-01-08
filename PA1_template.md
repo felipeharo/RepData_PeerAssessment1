@@ -10,7 +10,6 @@ options(scipen = 2, digits = 2)
 
 
 ```r
-options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)

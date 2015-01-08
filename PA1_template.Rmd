@@ -13,7 +13,6 @@ options(scipen = 2, digits = 2)
 ```
 
 ```{r cache=TRUE,echo = TRUE}
-options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)
