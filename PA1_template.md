@@ -4,7 +4,6 @@
 ## Loading and preprocessing the data
 
 ```r
-library(ggplot2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)
@@ -85,6 +84,7 @@ Evidently inputing missing data into the dataset changes things, but since the c
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```r
+library(ggplot2)
 Sys.setlocale("LC_TIME", "English")
 ```
 

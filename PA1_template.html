@@ -57,8 +57,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<pre class="r"><code>library(ggplot2)
-rawdata&lt;-read.csv(&quot;activity.csv&quot;)
+<pre class="r"><code>rawdata&lt;-read.csv(&quot;activity.csv&quot;)
 data&lt;-rawdata
 data$date&lt;-as.Date(data$date)</code></pre>
 </div>
@@ -109,7 +108,8 @@ mediansteps&lt;-median(daysteps)</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<pre class="r"><code>Sys.setlocale(&quot;LC_TIME&quot;, &quot;English&quot;)</code></pre>
+<pre class="r"><code>library(ggplot2)
+Sys.setlocale(&quot;LC_TIME&quot;, &quot;English&quot;)</code></pre>
 <pre><code>## [1] &quot;English_United States.1252&quot;</code></pre>
 <pre class="r"><code>day&lt;-numeric()
 for(i in 1:length(data$date)){
