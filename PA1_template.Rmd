@@ -4,10 +4,12 @@ output:
   html_document:
     keep_md: true
 ---
-
+The data used can be downloaded [here](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)  
+This is a .zip file containing the .csv file used in this study.  
 
 ## Loading and preprocessing the data
 ```{r cache=TRUE,echo = TRUE}
+options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)
@@ -26,7 +28,7 @@ hist(daysteps,main="Histogram - Steps per day",xlab="Steps per Day",col="steelbl
 meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
-I am ignoring the dates that have no data and removing those dates from the dataset
+I am ignoring the dates that have no data and removing those dates from the dataset  
 The mean (average number of steps per day) is **`r meansteps`** and the median is **`r mediansteps`**
 
 
@@ -37,8 +39,9 @@ dailyPattern<-tapply(data$steps,data$interval,mean)
 plot(intervals,dailyPattern,type="l",ylab="Average number of Steps",xlab="Interval",main="Daily Activity Pattern")
 max_index<-which.max(dailyPattern)
 max_interval<-intervals[max_index]
+max_steps<-dailyPattern[max_index]
 ```
-The interval **`r max_interval`** contains the maximum number of steps in average?
+The 5 minutes interval **`r max_interval`** contains the maximum number of steps in average with a value of `r max_steps` steps.
 
 
 ## Imputing missing values
@@ -52,7 +55,7 @@ for(i in 1:missingValues){
 }
 ```
 There are **`r missingValues`** missing values on this dataset  
-Each NA value is replaced with the mean of the 5 minute interval
+Each missing value is replaced with the average number of steps made per day on that particular 5 minute interval accross all days.
 ```{r echo = TRUE}
 daysteps<-numeric()
 dates<-unique(data$date)
@@ -64,8 +67,8 @@ meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
 Now the mean (average number of steps per day) is **`r meansteps`** and the median is **`r mediansteps`**  
-The values change a little because we are changing the dataset adding new values
-Evidently inputing missing data into the dataset changes things, but since the criteria is not aggressive, the differenced is very small
+The mean value doesn't change because I am using the mean value to fill the missing values. It can be expected that the median changes a little because the dataset has changed.
+Evidently inputing missing data into the dataset changes things, but since the criteria is not aggressive, the difference is very small
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ```{r echo = TRUE}

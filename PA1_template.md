@@ -1,9 +1,11 @@
 # Reproducible Research: Peer Assessment 1
-
+The data used can be downloaded [here](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)  
+This is a .zip file containing the .csv file used in this study.  
 
 ## Loading and preprocessing the data
 
 ```r
+options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)
@@ -27,7 +29,7 @@ hist(daysteps,main="Histogram - Steps per day",xlab="Steps per Day",col="steelbl
 meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
-I am ignoring the dates that have no data and removing those dates from the dataset
+I am ignoring the dates that have no data and removing those dates from the dataset  
 The mean (average number of steps per day) is **1.0766 &times; 10<sup>4</sup>** and the median is **1.0765 &times; 10<sup>4</sup>**
 
 
@@ -44,8 +46,9 @@ plot(intervals,dailyPattern,type="l",ylab="Average number of Steps",xlab="Interv
 ```r
 max_index<-which.max(dailyPattern)
 max_interval<-intervals[max_index]
+max_steps<-dailyPattern[max_index]
 ```
-The interval **835** contains the maximum number of steps in average?
+The 5 minutes interval **835** contains the maximum number of steps in average with a value of 206.1698 steps.
 
 
 ## Imputing missing values
