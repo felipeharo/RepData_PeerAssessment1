@@ -8,6 +8,10 @@ The data used can be downloaded [here](https://d396qusza40orc.cloudfront.net/rep
 This is a .zip file containing the .csv file used in this study.  
 
 ## Loading and preprocessing the data
+```{r echo = TRUE}
+options(scipen = 2, digits = 2)
+```
+
 ```{r cache=TRUE,echo = TRUE}
 options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
@@ -67,7 +71,7 @@ meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
 Now the mean (average number of steps per day) is **`r meansteps`** and the median is **`r mediansteps`**  
-The mean value doesn't change because I am using the mean value to fill the missing values. It can be expected that the median changes a little because the dataset has changed.
+The mean value doesn't change because I am using the mean value to fill the missing values. It can be expected that the median changes a little because the dataset has changed. In fact in this case the median takes the value of one of the added values.
 Evidently inputing missing data into the dataset changes things, but since the criteria is not aggressive, the difference is very small
 
 ## Are there differences in activity patterns between weekdays and weekends?

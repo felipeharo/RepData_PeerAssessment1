@@ -6,6 +6,11 @@ This is a .zip file containing the .csv file used in this study.
 
 ```r
 options(scipen = 2, digits = 2)
+```
+
+
+```r
+options(scipen = 2, digits = 2)
 rawdata<-read.csv("activity.csv")
 data<-rawdata
 data$date<-as.Date(data$date)
@@ -23,14 +28,14 @@ for(i in 1:length(dates)){
 hist(daysteps,main="Histogram - Steps per day",xlab="Steps per Day",col="steelblue")
 ```
 
-![plot of chunk unnamed-chunk-2](PA1_template_files/figure-html/unnamed-chunk-2.png) 
+![plot of chunk unnamed-chunk-3](PA1_template_files/figure-html/unnamed-chunk-3.png) 
 
 ```r
 meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
 I am ignoring the dates that have no data and removing those dates from the dataset  
-The mean (average number of steps per day) is **1.0766 &times; 10<sup>4</sup>** and the median is **1.0765 &times; 10<sup>4</sup>**
+The mean (average number of steps per day) is **10766.19** and the median is **10765**
 
 
 ## What is the average daily activity pattern?
@@ -41,14 +46,14 @@ dailyPattern<-tapply(data$steps,data$interval,mean)
 plot(intervals,dailyPattern,type="l",ylab="Average number of Steps",xlab="Interval",main="Daily Activity Pattern")
 ```
 
-![plot of chunk unnamed-chunk-3](PA1_template_files/figure-html/unnamed-chunk-3.png) 
+![plot of chunk unnamed-chunk-4](PA1_template_files/figure-html/unnamed-chunk-4.png) 
 
 ```r
 max_index<-which.max(dailyPattern)
 max_interval<-intervals[max_index]
 max_steps<-dailyPattern[max_index]
 ```
-The 5 minutes interval **835** contains the maximum number of steps in average with a value of 206.1698 steps.
+The 5 minutes interval **835** contains the maximum number of steps in average with a value of 206.17 steps.
 
 
 ## Imputing missing values
@@ -63,7 +68,7 @@ for(i in 1:missingValues){
 }
 ```
 There are **2304** missing values on this dataset  
-Each NA value is replaced with the mean of the 5 minute interval
+Each missing value is replaced with the average number of steps made per day on that particular 5 minute interval accross all days.
 
 ```r
 daysteps<-numeric()
@@ -74,15 +79,15 @@ for(i in 1:length(dates)){
 hist(daysteps,main="Histogram - Steps per day",xlab="Steps per Day",col="steelblue")
 ```
 
-![plot of chunk unnamed-chunk-5](PA1_template_files/figure-html/unnamed-chunk-5.png) 
+![plot of chunk unnamed-chunk-6](PA1_template_files/figure-html/unnamed-chunk-6.png) 
 
 ```r
 meansteps<-mean(daysteps)
 mediansteps<-median(daysteps)
 ```
-Now the mean (average number of steps per day) is **1.0766 &times; 10<sup>4</sup>** and the median is **1.0766 &times; 10<sup>4</sup>**  
-The values change a little because we are changing the dataset adding new values
-Evidently inputing missing data into the dataset changes things, but since the criteria is not aggressive, the differenced is very small
+Now the mean (average number of steps per day) is **10766.19** and the median is **10766.19**  
+The mean value doesn't change because I am using the mean value to fill the missing values. It can be expected that the median changes a little because the dataset has changed. In fact in this case the median takes the value of one of the added values.
+Evidently inputing missing data into the dataset changes things, but since the criteria is not aggressive, the difference is very small
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -110,4 +115,4 @@ names(data)[4]<-"day"
 ggplot(data,aes(interval,steps))+facet_grid(.~day)+ stat_summary(fun.y="mean", geom="line")
 ```
 
-![plot of chunk unnamed-chunk-6](PA1_template_files/figure-html/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-7](PA1_template_files/figure-html/unnamed-chunk-7.png) 
